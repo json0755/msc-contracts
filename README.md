@@ -12,17 +12,14 @@ MSC Contracts是一个基于Solana区块链的多功能智能合约系统，集�
 - **代币转账**: 安全的点对点代币转移
 - **批量空投**: 高效的批量代币分发功能
 
-### 2. 数据确权系统 (ownership.rs)
-- **创建确权声明**: 用户可以为数据创建所有权声明
+### 2. 数据确权与支付系统 (ownership.rs & service.rs)
+- **原子操作**: 支付与确权的原子性操作 (统一价格1 MSC)
 - **确权验证**: 验证数据所有权的真实性
-- **用户统计**: 跟踪用户的确权活动
-
-### 3. 服务支付模块 (service.rs)
-- **MSC代币支付**: 使用MSC代币支付各种服务费用
 - **支付记录**: 完整的支付历史追踪
+- **用户统计**: 跟踪用户的确权和支付活动
 - **余额验证**: 确保支付安全性
 
-### 4. 代币兑换系统 (exchange.rs)
+### 3. 代币兑换系统 (exchange.rs)
 - **MSC/USDC兑换**: 支持MSC与USDC之间的兑换
 - **流动性池**: 去中心化的流动性管理
 - **价格发现**: 基于供需的动态定价机制
@@ -42,7 +39,7 @@ msc-contracts/
 │   ├── lib.rs              # 主程序入口
 │   ├── msc_token.rs        # MSC代币管理
 │   ├── ownership.rs        # 数据确权
-│   ├── service.rs          # 服务支付
+│   ├── service.rs          # 支付与确权原子操作
 │   └── exchange.rs         # 代币兑换
 ├── tests/                  # 测试文件
 ├── migrations/             # 部署脚本
@@ -89,12 +86,9 @@ anchor deploy --provider.cluster devnet
 - `transfer_msc(amount)`: 转账MSC代币
 - `batch_airdrop(recipients, amounts)`: 批量空投
 
-### 数据确权
-- `create_claim(data_hash, metadata)`: 创建数据确权声明
-- `verify_ownership(claim_id)`: 验证数据所有权
-
-### 服务支付
-- `pay_with_msc(service_id, amount)`: 使用MSC支付服务费用
+### 数据确权与支付
+- `pay_and_create_claim(amount, file_hash)`: 原子操作：支付并创建确权记录 (统一价格1 MSC)
+- `get_claim()`: 查询确权记录
 
 ### 代币兑换
 - `initialize_exchange_pool()`: 初始化兑换池
@@ -129,7 +123,7 @@ anchor deploy --provider.cluster devnet
 - **主网**: https://api.mainnet-beta.solana.com
 
 ### 程序ID
-- 开发环境: `6TnYnENiGmLiVQFHp29wbMtmVrLJhwFRn7EMqsipvkn5`
+- 开发环境: `F61oRxmdwKKuHcN1rNRshKQDnAQAeqduitwb1sY2J4Yd`
 - 生产环境: 待部署后更新
 
 ## 许可证

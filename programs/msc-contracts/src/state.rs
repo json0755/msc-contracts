@@ -33,15 +33,17 @@ impl OwnershipClaim {
 pub struct PaymentRecord {
     pub payer: Pubkey,
     pub amount: u64,
-    pub service_type: u8, // 0: 基础确权, 1: 高级确权, 2: 其他服务
     pub timestamp: i64,
     pub transaction_id: String,
     pub status: u8, // 0: 待处理, 1: 已完成, 2: 已退款
+    pub is_used: bool, // 防止重复使用付费记录
 }
 
 impl PaymentRecord {
-    pub const LEN: usize = 8 + 32 + 8 + 1 + 8 + 4 + 64 + 1;
+    pub const LEN: usize = 8 + 32 + 8 + 8 + 4 + 64 + 1 + 1;
 }
+
+
 
 // 兑换池配置
 #[account]

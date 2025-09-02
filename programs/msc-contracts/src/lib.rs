@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token, TokenAccount, Mint};
 use anchor_spl::associated_token::AssociatedToken;
 
-declare_id!("6pD5q2JFqZWUwP9a5gZesrW4RaeitZpehkCoiUe4igpe");
+declare_id!("F61oRxmdwKKuHcN1rNRshKQDnAQAeqduitwb1sY2J4Yd");
 
 // 导入各个模块
 pub mod msc_token;
@@ -52,33 +52,13 @@ pub mod msc_contracts {
         msc_token::batch_airdrop(ctx, amounts)
     }
 
-    // 确权合约功能
-    pub fn create_claim(
-        ctx: Context<CreateClaim>,
+    // 支付并创建确权记录（原子操作）
+    pub fn pay_and_create_claim(
+        ctx: Context<PayAndCreateClaim>,
+        amount: u64,
         file_hash: String,
     ) -> Result<()> {
-        ownership::create_claim(ctx, file_hash)
-    }
-
-    pub fn get_claim(
-        ctx: Context<GetClaim>,
-    ) -> Result<()> {
-        ownership::get_claim(ctx)
-    }
-
-    // 服务合约功能
-    pub fn pay_with_msc(
-        ctx: Context<PayWithMsc>,
-        amount: u64,
-        service_type: u8,
-    ) -> Result<()> {
-        service::pay_with_msc(ctx, amount, service_type)
-    }
-
-    pub fn get_payment_history(
-        ctx: Context<GetPaymentHistory>,
-    ) -> Result<()> {
-        service::get_payment_history(ctx)
+        service::pay_and_create_claim(ctx, amount, file_hash)
     }
 
     // 兑换合约功能
