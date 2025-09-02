@@ -9,18 +9,21 @@ skip-lint = false
 [programs.localnet]
 msc_contracts = "DaSw2ffsW6C78ZKDwjMFPDt7mRLttjUymgbAAnwsaF9W"
 
+[programs.devnet]
+msc_contracts = "DaSw2ffsW6C78ZKDwjMFPDt7mRLttjUymgbAAnwsaF9W"
+
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
-wallet = "~/.config/solana/id.json"
+cluster = "https://devnet.helius-rpc.com/?api-key=2cf39e12-5ff3-49ca-9545-48bd0edb0b0d"
+wallet = "~/.config/solana/bape-wallet.json"
 
 [test]
 startup_wait = 10000
 shutdown_wait = 2000
 upgrade_authority_off = false
-url = "http://localhost:8899"
+url = "https://devnet.helius-rpc.com/?api-key=2cf39e12-5ff3-49ca-9545-48bd0edb0b0d"
 
 [scripts]
 test = "yarn run mocha -t 1000000 tests/"

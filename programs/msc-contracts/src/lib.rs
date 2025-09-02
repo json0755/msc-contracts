@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token, TokenAccount, Mint};
 use anchor_spl::associated_token::AssociatedToken;
 
-declare_id!("DaSw2ffsW6C78ZKDwjMFPDt7mRLttjUymgbAAnwsaF9W");
+declare_id!("6pD5q2JFqZWUwP9a5gZesrW4RaeitZpehkCoiUe4igpe");
 
 // 导入各个模块
 pub mod msc_token;
